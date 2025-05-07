@@ -1,0 +1,26 @@
+{
+  "name": "alumni",
+  "version": "1.0.0",
+  "description": "Node project",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vibhor-eng/alumni-mgt-node.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Vibhor Tyagi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vibhor-eng/alumni-mgt-node/issues"
+  },
+  "homepage": "https://github.com/vibhor-eng/alumni-mgt-node#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
