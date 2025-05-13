@@ -1,15 +1,15 @@
 import express from 'express'
+import { app } from "./app.js";
 
 import dotenv from "dotenv"
 
-const app = express();
 
 dotenv.config({
     path: './.env'
 })
 
 app.get('/', (req,res) => {
-    res.send("server is readyss");
+    res.send("server is ready");
 })
 
 const port = process.env.PORT || 4000;
