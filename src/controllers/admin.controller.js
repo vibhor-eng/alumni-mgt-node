@@ -1,6 +1,8 @@
-const LoginPage = (req,res) => {
-    res.send("AA gya")
-}
+import { asyncHandler } from "../utils/asyncHandler.js";
+
+const LoginPage = asyncHandler(async (req,res) => {
+    res.render('admin/auth/login');
+})
 
 
 export {LoginPage}
