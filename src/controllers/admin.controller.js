@@ -49,5 +49,9 @@ const LoginPage = asyncHandler(async (req,res) => {
     res.render('admin/auth/login');
 })
 
+const Dashboard = asyncHandler(async (req,res) => {
+    res.render('admin/dashboard');
+})
 
-export {LoginPage}
+
+export {LoginPage,Dashboard}
