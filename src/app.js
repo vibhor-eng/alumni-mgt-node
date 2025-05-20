@@ -6,6 +6,12 @@ import adminRouter from './routes/admin.router.js'
 
 const app = express();
 
+// To parse JSON bodies
+app.use(express.json());
+
+// To parse URL-encoded bodies (e.g., from HTML forms)
+app.use(express.urlencoded({ extended: true }));
+
 // load ejs file
 app.set('view engine', 'ejs');
 

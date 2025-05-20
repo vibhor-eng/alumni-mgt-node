@@ -54,6 +54,9 @@ div#login-right::before {
     height: calc(100%);
     background: #000000e0;
 }
+.error{
+    color:red
+}
 
 </style>
 
@@ -64,8 +67,10 @@ div#login-right::before {
     <div id="login-right">
         <div class="card col-md-8">
             <div class="card-body">
+                <%- include('error') %>
+                <%- include('success') %>
                 
-                <form method="POST" action="/admin/custom-login">
+                <form class="pt-3" id = "login_form" method = "post" action = "/admin/login">
        
                     <div class="form-group">
                         <label for="username" class="control-label">Username</label>
@@ -76,7 +81,7 @@ div#login-right::before {
                         <input type="password" id="password" name="password" class="form-control">
                          
                     </div>
-                    <center><button class="btn-sm btn-block btn-wave col-md-4 btn-primary">Login</button></center>
+                    <center><button type = "submit" class="btn-sm btn-block btn-wave col-md-4 btn-primary">Login</button></center>
                 </form>
             </div>
         </div>
@@ -86,6 +91,32 @@ div#login-right::before {
 </main>
 
 <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<script type="text/javascript">
+    
+  $(document).ready(function () {
+
+
+    $('#login_form').validate({ // initialize the plugin
+        rules: {
+            email: {
+                required: true,
+                email: true,
+            },
+            password:{
+              required:true,
+              minlength:6,
+              maxlength:8,
+            }
+        },
+        submitHandler: function(form) {
+          form.submit(); // Submit the form if valid
+        }
+    });
+
+});
+
+</script>
 
 <%- include('footer') %>
 
