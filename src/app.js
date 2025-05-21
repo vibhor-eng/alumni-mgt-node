@@ -22,6 +22,23 @@ app.use(
     })
   );
 
+// Define a global variable for the header to check login status
+// jo login k baad set karte hai vo value yha aa jati hai aur kahi b access ho jaati hai
+//variable user me user details yhi se milti hai
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+});
+
+// just to get urls in navbar
+app.use((req, res, next) => {
+  res.locals.fullUrl = req.originalUrl;
+  res.locals.globalVar = 'This is a global variable set in middleware';
+  next();  // Pass the request to the next middleware/route handler
+});
+
+
 // load ejs file
 app.set('view engine', 'ejs');
 

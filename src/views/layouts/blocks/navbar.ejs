@@ -1,0 +1,43 @@
+
+
+ <main class="d-flex" id="wrapper">
+ <label for="sidebartoggler" id="sidebarToggle" class="toggle-icons">☰</label>
+<nav id="sidebar-wrapper" class='mx-lt-5 bg-dark' >
+            <% 
+                const urlParts = fullUrl.split('/');
+            %>
+		
+		<div class="sidebar-list">
+				<a href="/admin/dashboard" class="nav-item nav-home <% if(urlParts[2] == 'dashboard') { 'active'; } %></a>"><span class='icon-field'><i class="fa fa-home"></i></span> Home</a>
+				<a href="admin/users" class="nav-item nav-users <% if(urlParts[2] == 'users') { 'active'; } %>"><span class='icon-field'><i class="fa fa-image"></i></span> Users </a>
+				<a href="admin/posts" class="nav-item nav-events <% if(urlParts[2] == 'posts') { 'active'; } %>"><span class='icon-field'><i class="fa fa-list"></i></span> Posts </a>
+				<a href="admin/jobs" class="nav-item nav-jobs <% if(urlParts[2] == 'jobs') { 'active'; } %>"><span class='icon-field'><i class="fa fa-list"></i></span> Jobs </a>
+				<!-- <a href="#" class="nav-item nav-courses"><span class='icon-field'><i class="fa fa-list"></i></span> Course List</a>
+				<a href="#" class="nav-item nav-alumni"><span class='icon-field'><i class="fa fa-users"></i></span> Alumni List</a>
+				<a href="#" class="nav-item nav-jobs"><span class='icon-field'><i class="fa fa-briefcase"></i></span> Jobs</a>
+				<a href="#" class="nav-item nav-events"><span class='icon-field'><i class="fa fa-calendar-day"></i></span> Events</a>
+				<a href="#" class="nav-item nav-forums"><span class='icon-field'><i class="fa fa-comments"></i></span> Forum</a> -->
+		</div>
+
+</nav>
+
+ <!-- End Create Job Modal -->  
+     <script>
+	 window.addEventListener('DOMContentLoaded', event => {
+
+    // Toggle the side navigation
+    const sidebarToggle = document.body.querySelector('#sidebarToggle');
+    if (sidebarToggle) {
+        // Uncomment Below to persist sidebar toggle between refreshes
+        // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+        //     document.body.classList.toggle('sb-sidenav-toggled');
+        // }
+        sidebarToggle.addEventListener('click', event => {
+            event.preventDefault();
+            document.body.classList.toggle('sb-sidenav-toggled');
+            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+        });
+		}
+
+	});
+	 </script> 

@@ -54,4 +54,13 @@ const Dashboard = asyncHandler(async (req,res) => {
 })
 
 
-export {LoginPage,Dashboard}
+const Logout = asyncHandler(async(req,res) => {
+    req.session.destroy((err) => {
+        if (err) {
+          return res.redirect('/admin/dashboard');
+        }
+        res.redirect('/admin/login');
+    });
+})
+
+export {LoginPage,Dashboard,Logout}
