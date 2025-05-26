@@ -63,4 +63,18 @@ const Logout = asyncHandler(async(req,res) => {
     });
 })
 
-export {LoginPage,Dashboard,Logout}
+const UserList = asyncHandler(async(req,res) => {
+    try{
+
+        const UserList = await User.find({ user_type: 'user' });
+        res.render('admin/users/list', { users: UserList });
+
+
+    }catch(error){
+        res.render("admin/users/list", {
+            errorMessage: error
+        });
+    }
+})
+
+export {LoginPage,Dashboard,Logout,UserList}

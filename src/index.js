@@ -9,7 +9,7 @@ dotenv.config({
 })
 
 app.get('/', (req,res) => {
-    res.send("server is ready");
+    res.redirect('/admin/login');  // Redirect to /new-route
 })
 
 const port = process.env.PORT || 4000;
