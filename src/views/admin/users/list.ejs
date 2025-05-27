@@ -25,6 +25,42 @@
 				</tr>
 			</thead>
 			<em class="fa fa-spinner fa-spin" style="font-size:24px;display:none"></em>
+            <tbody>
+                <% 
+                    let i = 1;
+                    users.forEach(function(user) { 
+
+                %>
+                    <tr>
+                        <td><%= i %></td>
+                        <td><%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1); %></td>
+                        <td><%= user.lastName %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                            <% if(user.verify) { %>
+                                <span class="badge badge-primary">Verified</span>
+                            <% }else{ %>
+                                <span class="badge badge-danger">Un verified</span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <center>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-primary">Action</button>
+								  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    <span class="sr-only">Toggle Dropdown</span>
+								  </button>
+								  <div class="dropdown-menu">
+								    <a class="dropdown-item edit_user" href="javascript:void(0)" data-id = '<%= user._id %>' data-name = '<%= user.firstName %>' data-lname = '<%= user.lastName %>' data-email = '<%= user.email %>' data-verify = '<%= user.verify %>'>Edit</a>
+								    <div class="dropdown-divider"></div>
+								    <a class="dropdown-item delete_user" href="javascript:void(0)" data-id = '<%= user._id %>'>Delete</a>
+								  </div>
+								</div>
+						    </center>
+                        </td>
+                    </tr>
+                <% i++ }) %>
+            </tbody>
                 
 		</table>
 			</div>
