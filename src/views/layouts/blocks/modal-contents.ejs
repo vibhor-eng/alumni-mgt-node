@@ -1,0 +1,47 @@
+
+
+<!-- Edit User -->
+<div class="modal fade" id="edit_users" role="dialog" style="display: none;" aria-hidden="true">
+    <div role="document" class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Edit User</h5>
+      </div>
+      <div class="modal-body">
+   <div class="container-fluid">
+	<div id="msg"></div>
+	
+	<form action="" id="manage-user">	
+		<input type="hidden" name="id" id = "user_id" value="">
+		<div class="form-group">
+			<label for="name">First Name</label>
+			<input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name" value="" required="">
+		</div>
+		<div class="form-group">
+			<label for="username">Last Name</label>
+			<input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name" value="" required="" autocomplete="off">
+		</div>
+		<div class="form-group">
+			<label for="username">Email</label>
+			<input type="email" name="email" id="email" placeholder="email" class="form-control" value="" required="" autocomplete="off" readonly>
+		</div>
+		<div class="form-group">
+			<label for="type">User Verification</label>
+			<select name="verify" id="verify" class="custom-select">
+				<option value="">Please Select</option>
+				<option value="true">Verified</option>
+				<option value="false" selected="">Un Verified</option>
+			</select>
+		</div>
+						
+
+	</form>
+</div>
+</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="edit_user">Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+      </div>
+    </div>
+  </div>

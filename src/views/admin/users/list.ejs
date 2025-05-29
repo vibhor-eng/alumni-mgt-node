@@ -1,77 +1,174 @@
-<%- include('master') %>
+    <%- include('master') %>
 
-<div id="page-content-wrapper">
-<div class="container-fluid">
-	
-	<!-- <div class="row">
-	<div class="col-lg-12">
-			<button class="btn btn-primary float-right btn-sm" id="new_user"><i class="fa fa-plus"></i> New user</button>
-	</div>
-	</div> -->
-	<br>
-	<div class="row">
+    <div id="page-content-wrapper">
+    <div class="container-fluid">
+        
+        <!-- <div class="row">
+        <div class="col-lg-12">
+                <button class="btn btn-primary float-right btn-sm" id="new_user"><i class="fa fa-plus"></i> New user</button>
+        </div>
+        </div> -->
+        <br>
+        <div class="row">
 
-		<div class="card col-lg-12">
-			<div class="card-body">
-				<table class="table-striped table-bordered col-md-12">
-			<thead>
-				<tr>
-					<th class="text-center">#</th>
-					<th class="text-center">First Name</th>
-					<th class="text-center">Last Name</th>
-					<th class="text-center">email</th>
-					<th class="text-center">Status</th>
-					<th class="text-center">Action</th>
-				</tr>
-			</thead>
-			<em class="fa fa-spinner fa-spin" style="font-size:24px;display:none"></em>
-            <tbody>
-                <% 
-                    let i = 1;
-                    users.forEach(function(user) { 
-
-                %>
+            <div class="card col-lg-12">
+                <div class="card-body">
+                    <%- include('error') %>
+                <%- include('success') %>
+                    <table class="table-striped table-bordered col-md-12">
+                <thead>
                     <tr>
-                        <td><%= i %></td>
-                        <td><%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1); %></td>
-                        <td><%= user.lastName %></td>
-                        <td><%= user.email %></td>
-                        <td>
-                            <% if(user.verify) { %>
-                                <span class="badge badge-primary">Verified</span>
-                            <% }else{ %>
-                                <span class="badge badge-danger">Un verified</span>
-                            <% } %>
-                        </td>
-                        <td>
-                            <center>
-								<div class="btn-group">
-								  <button type="button" class="btn btn-primary">Action</button>
-								  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								    <span class="sr-only">Toggle Dropdown</span>
-								  </button>
-								  <div class="dropdown-menu">
-								    <a class="dropdown-item edit_user" href="javascript:void(0)" data-id = '<%= user._id %>' data-name = '<%= user.firstName %>' data-lname = '<%= user.lastName %>' data-email = '<%= user.email %>' data-verify = '<%= user.verify %>'>Edit</a>
-								    <div class="dropdown-divider"></div>
-								    <a class="dropdown-item delete_user" href="javascript:void(0)" data-id = '<%= user._id %>'>Delete</a>
-								  </div>
-								</div>
-						    </center>
-                        </td>
+                        <th class="text-center">#</th>
+                        <th class="text-center">First Name</th>
+                        <th class="text-center">Last Name</th>
+                        <th class="text-center">email</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
                     </tr>
-                <% i++ }) %>
-            </tbody>
+                </thead>
+                <em class="fa fa-spinner fa-spin" style="font-size:24px;display:none"></em>
+                <tbody>
+                    <% 
+                        let i = 1;
+                        users.forEach(function(user) { 
+
+                    %>
+                        <tr>
+                            <td><%= i %></td>
+                            <td><%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1); %></td>
+                            <td><%= user.lastName %></td>
+                            <td><%= user.email %></td>
+                            <td>
+                                <% if(user.verify) { %>
+                                    <span class="badge badge-primary">Verified</span>
+                                <% }else{ %>
+                                    <span class="badge badge-danger">Un verified</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <center>
+                                    <div class="btn-group">
+                                    <button type="button" class="btn btn-primary">Action</button>
+                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item edit_user" href="javascript:void(0)" data-id = '<%= user._id %>' data-name = '<%= user.firstName %>' data-lname = '<%= user.lastName %>' data-email = '<%= user.email %>' data-verify = '<%= user.verify %>'>Edit</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item delete_user" href="javascript:void(0)" data-id = '<%= user._id %>'>Delete</a>
+                                    </div>
+                                    </div>
+                                </center>
+                            </td>
+                        </tr>
+                    <% i++ }) %>
+                </tbody>
+                    
+            </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </main>
+
+    <script>
+        $(document).ready(function () {
+        var table = $('table').DataTable();
+
+            $('.edit_user').click(function(){
+
+            $('#edit_users').modal('show');
+            $('#user_id').val($(this).attr('data-id'));
+            $('#firstName').val($(this).attr('data-name'));
+            $('#lastName').val($(this).attr('data-lname'));
+            $('#email').val($(this).attr('data-email'));
+            let verify = 'false';
+            if($(this).attr('data-verify') == true){
+                verify = 'true';
+            }
+            $('#verify option[value="'+verify+'"]').prop('selected', true);
+
+        })
+
+        $('#edit_user').click(function(e){
+            let user_id = $('#user_id').val();
+            let firstName = $('#firstName').val();
+            let lastName = $('#lastName').val();
+            let email = $('#email').val();
+            let verify =$('#verify').val();
+        $.ajax({
+            url: "{{ url('admin/update-user') }}",
+            type: "POST",
+            data:{
+                user_id:user_id,firstName:firstName,lastName:lastName,email:email,verify:verify
+            },
+            dataType: 'json',
+            beforeSend: function(){
+            // $('#invite-agent').attr('disabled','disabled');
+            // $('#invite-agent').hide();
+            // $('.fa-spin').css('font-size','24px');
+            // $('.fa-spin').show();
+            },
+            success: function (data) {
+                $('#edit_users').modal('hide');
+                if(data.status == true){
+
+
+
+                swal({
+                    title: 'Success',
+                    text: 'Rcords has been updated.',
+                    type: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Ok',
+                    closeOnConfirm: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        location.reload();
+                    }
+                });
                 
-		</table>
-			</div>
-		</div>
-	</div>
 
-</div>
-</main>
+                
 
-<script>
-    $('table').dataTable();
+                }else{
+                
+                    swal({
+                    title: 'Oops..',
+                    text: 'Something went wrong!',
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Ok',
+                    closeOnConfirm: true
+                });
 
-</script>
-<%- include('footer') %>
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $('#edit_users').modal('hide');
+                if (jqXHR.status == 500) {
+
+
+                    swal({
+                    title: 'Oops..',
+                    text: "Something went wromg.",
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Ok',
+                    closeOnConfirm: true
+                });
+
+                    
+                } else {
+                    console.log(jqXHR.responseText);
+                }
+            }
+            });
+        });
+
+    })
+
+    </script>
+    <%- include('footer') %>

@@ -77,4 +77,44 @@ const UserList = asyncHandler(async(req,res) => {
     }
 })
 
-export {LoginPage,Dashboard,Logout,UserList}
+const updateUser = asyncHandler(async(req,res) => {
+
+    try{
+
+        const {user_id,firstName,lastName,email,verify} = req.body
+
+        const updateQuery = await User.findByIdAndUpdate(
+            user_id,
+            {
+                //jo field hme set karna hai
+                $set:{
+                    firstName:firstName,
+                    lastName,lastName,
+                    email:email,
+                    verify:verify
+                }
+            },
+            {new:true}//return updated document
+        )
+
+        if (updateQuery) {
+            res.json({
+                message: "updated",
+                status:true
+            });
+        } else {
+            res.json({
+                message: "something wrong.",
+                status:false
+            });
+        }
+
+    }catch(error){
+        res.render("admin/users/list", {
+            errorMessage: error
+        });
+    }
+
+})
+
+export {LoginPage,Dashboard,Logout,UserList,updateUser}
