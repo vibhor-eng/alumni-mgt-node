@@ -98,7 +98,7 @@
             let email = $('#email').val();
             let verify =$('#verify').val();
         $.ajax({
-            url: "{{ url('admin/update-user') }}",
+            url: "/admin/update-user",
             type: "POST",
             data:{
                 user_id:user_id,firstName:firstName,lastName:lastName,email:email,verify:verify
@@ -167,6 +167,69 @@
             }
             });
         });
+
+        $('.delete_user').click(function(){
+	        let user_id = $(this).attr('data-id');
+            swal({
+                title: "Are you sure?",
+            text: "Your will not be able to recover this record!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+            },
+	         function(isConfirm) {
+	              if (isConfirm) {
+	                 delete_user(user_id);
+	              }
+	         });
+	    })
+
+        function delete_user(id){
+	
+            $.ajax({
+                url: "/admin/delete-user",
+                type: "POST",
+                data:{id:id},
+                success:function(resp){
+                    if(resp.status==true){
+                        swal({
+                            title: 'Success',
+                            text: 'Record has been deleted.',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ok',
+                            closeOnConfirm: true
+                        },
+                        function(isConfirm) {
+                            if (isConfirm) {
+                                location.reload();
+                            }
+                        });
+
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                if (jqXHR.status == 500) {
+
+
+                    swal({
+                    title: 'Oops..',
+                    text: "Something went wromg.",
+                    type: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Ok',
+                    closeOnConfirm: true
+                });
+
+                    
+                } else {
+                    console.log(jqXHR.responseText);
+                }
+            }
+		    })
+	    }
 
     })
 

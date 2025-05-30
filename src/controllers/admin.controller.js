@@ -24,6 +24,7 @@ const LoginPage = asyncHandler(async (req,res) => {
                   ]
             })
 
+
             //### findOne ye sab User modal k pass hai but jo custom method hai jaise isPasswrdCorret ye user k pass jai
             if(!user){
                 res.render("admin/auth/login", {
@@ -66,7 +67,14 @@ const Logout = asyncHandler(async(req,res) => {
 const UserList = asyncHandler(async(req,res) => {
     try{
 
-        const UserList = await User.find({ user_type: 'user' });
+        const UserList = await User.find({
+            $and: [
+                { user_type: 'user'},
+                { is_deleted: false},
+                
+            ]
+        }); 
+        console.log(UserList);
         res.render('admin/users/list', { users: UserList });
 
 
@@ -117,4 +125,42 @@ const updateUser = asyncHandler(async(req,res) => {
 
 })
 
-export {LoginPage,Dashboard,Logout,UserList,updateUser}
+const deleteUser = asyncHandler(async(req,res) => {
+
+    try{
+
+        const {id} = req.body
+        
+        const updateQuery = await User.findByIdAndUpdate(
+            id,
+            {
+                //jo field hme set karna hai
+                $set:{
+                    is_deleted:true,
+                }
+            },
+            {new:true}//return updated document
+        )
+
+        if (updateQuery) {
+            res.json({
+                message: "deleted",
+                status:true
+            });
+        } else {
+            res.json({
+                message: "something wrong.",
+                status:false
+            });
+        }
+
+    }catch(error){
+        res.json({
+            message: "sddsd",
+            status:false
+        });
+    }
+
+})
+
+export {LoginPage,Dashboard,Logout,UserList,updateUser,deleteUser}

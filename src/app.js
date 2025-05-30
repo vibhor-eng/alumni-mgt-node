@@ -3,6 +3,7 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 import adminRouter from './routes/admin.router.js'
 import session from "express-session";
+import MongoStore from 'connect-mongo';//this package because using expression-session sessionid store in memory and when we code change server restart and sessio lost thats why we use connect mongo
 
 const app = express();
 
@@ -18,7 +19,10 @@ app.use(
       secret: process.env.JWT_SECRET,
       resave: false,
       saveUninitialized: false,
-      cookie: { secure: false }, // Change to `secure: true` in production if using HTTPS
+        store: MongoStore.create({
+            mongoUrl: 'mongodb://localhost:27017/alumni_check',
+            ttl: 14 * 24 * 60 * 60, // Session expires in 14 days
+        }),
     })
   );
 
