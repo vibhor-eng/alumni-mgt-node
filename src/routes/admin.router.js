@@ -9,6 +9,7 @@ router.route("/login").post(LoginPage)
 router.route("/dashboard").get(Dashboard)
 router.route("/signout").get(adminMiddleware,Logout)
 router.route("/users").get(adminMiddleware,UserList)
+router.route("/posts").get(adminMiddleware,UserList)
 router.route("/update-user").post(adminMiddleware,updateUser)
 router.route("/delete-user").post(adminMiddleware,deleteUser)
 
