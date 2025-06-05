@@ -45,3 +45,39 @@
       </div>
     </div>
   </div>
+
+  <!-- edit post -->
+  <div class="modal fade" id="edit_posts" role="dialog" style="display: none;" aria-hidden="true">
+    <div role="document" class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Edit Post</h5>
+      </div>
+      <div class="modal-body">
+   <div class="container-fluid">
+	<div id="msg"></div>
+	
+	<form action="" id="manage-user">	
+		<input type="hidden" name="id" id = "post_id" value="">
+		
+		<div class="form-group">
+			<label for="type">Post Status</label>
+			<select name="is_hidden" id="status" class="custom-select">
+				<option value="">Please Select</option>
+				<option value="false">Show</option>
+				<option value="true" selected="">Hidden</option>
+			</select>
+		</div>
+						
+
+	</form>
+</div>
+</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="edit_post">Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+      </div>
+    </div>
+  </div>
+  <!-- end edit post -->
