@@ -81,3 +81,47 @@
     </div>
   </div>
   <!-- end edit post -->
+
+  <!-- Create Job Modal -->
+  <div class="modal fade" id="create_jobs" role="dialog" style="display: none;" aria-hidden="true">
+    <div role="document" class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Create New Job</h5>
+      </div>
+      <div class="modal-body">
+   <div class="container-fluid">
+	<div id="job_validate" style = "color:red"></div>
+	
+	<form action="" id="manage-user">	
+		<input type="hidden" name="id" id = "job_id" value="">
+		<div class="form-group">
+			<label for="name">Designation</label>
+			<input type="text" name="designation" id="designation" class="form-control" placeholder="Enter Designation" value="" required="">
+		</div>
+		<div class="form-group">
+			<label for="username">Company</label>
+			<input type="text" name="company" id="company" class="form-control" placeholder="Enter company Name" value="" required="" autocomplete="off">
+		</div>
+		<div class="form-group">
+			<label for="username">Job Link</label>
+			<input type="email" name="job_link" id="job_link" placeholder="Enter Job Link" class="form-control" value="" required="" autocomplete="off">
+		</div>
+		<div class="form-group">
+			<label for="type">Due Date</label>
+			<input type="text" class="form-control datetimepicker" name="due_date" id = "due_date" value="" required="" autocomplete="off">
+		</div>
+						
+
+	</form>
+</div>
+</div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="save_jobs">Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    </div>
+</div>
+
+ <!-- End Create Job Modal -->
