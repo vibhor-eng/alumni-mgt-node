@@ -47,9 +47,9 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item edit_post" href="javascript:void(0)" data-id = '<%= job._id %>' data-comp = '<%= job.company %>' data-designation = '<%= job.designation %>' data-link = '<%= job.link %>' data-due = '<%= job.due_date %>'</a>'>Edit</a>
+                                        <a class="dropdown-item edit_job" href="javascript:void(0)" data-id = '<%= job._id %>' data-comp = '<%= job.company %>' data-designation = '<%= job.designation %>' data-link = '<%= job.job_link %>' data-due = '<%= job.due_date %>'</a>Edit</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item delete_post" href="javascript:void(0)" data-id = '<%= job._id %>'>Delete</a>
+                                        <a class="dropdown-item delete_job" href="javascript:void(0)" data-id = '<%= job._id %>'>Delete</a>
                                     </div>
                                     </div>
                                 </center>
@@ -93,7 +93,7 @@
 
         var url = "/admin/create-job";
         if(job_id != ''){
-            var url = "admin/update-job";
+            var url = "/admin/update-job";
         }
 
         if(designation == '' || company == '' || job_link == '' || due_date == ''){
@@ -171,6 +171,75 @@
              }
          }
      });
+
+     $('.delete_job').click(function(){
+	let job_id = $(this).attr('data-id');
+	swal({
+        title: "Are you sure?",
+      text: "Your will not be able to recover this record!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonClass: "btn-danger",
+      confirmButtonText: "Yes, delete it!",
+      closeOnConfirm: false
+    },
+
+    function(isConfirm) {
+        if (isConfirm) {
+            delete_job(job_id);
+        }
+    });
+})
+
+	function delete_job(id){
+	// alert(id);
+		$.ajax({
+			url: "/admin/delete-job",
+	        type: "POST",
+			data:{id:id},
+			success:function(resp){
+				if(resp.status==true){
+					swal({
+			            title: 'Success',
+			            text: 'Record has been deleted.',
+			            type: 'success',
+			            confirmButtonColor: '#3085d6',
+			            confirmButtonText: 'Ok',
+			            closeOnConfirm: true
+		        	},
+			         function(isConfirm) {
+			              if (isConfirm) {
+			                 location.reload();
+			              }
+			         });
+
+				}
+			},
+         error: function (jqXHR, textStatus, errorThrown) {
+             if (jqXHR.status == 500) {
+
+
+				swal({
+	            title: 'Oops..',
+	            text: "Something went wromg.",
+	            type: 'error',
+	            confirmButtonColor: '#3085d6',
+	            confirmButtonText: 'Ok',
+	            closeOnConfirm: true
+        	},
+	         function(isConfirm) {
+	              if (isConfirm) {
+	                 location.reload();
+	              }
+	         });
+
+                
+             } else {
+                 console.log(jqXHR.responseText);
+             }
+         }
+		})
+	}
 });
 
 </script>

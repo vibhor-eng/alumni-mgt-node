@@ -21,13 +21,88 @@ const jobList = asyncHandler(async(req,res) => {
 
 const createJob = asyncHandler(async(req,res) => {
 
+
+
 })
 
 const updateJob = asyncHandler(async(req,res) => {
 
+    try{
+
+        const {designation,company,job_link,due_date,job_id} = req.body
+
+        const updateJob = await Job.findByIdAndUpdate(
+            job_id,
+            {
+                //jo field hme set karna hai
+                $set:{
+                    designation:designation,
+                    company:company,
+                    job_link:job_link,
+                    due_date:due_date,
+                    
+                }
+            },
+            {new:true}//return updated document
+        )
+
+        if (updateJob) {
+            res.json({
+                message: "updated",
+                status:true
+            });
+        } else {
+            res.json({
+                message: "something wrong.",
+                status:false
+            });
+        }
+
+    }catch(error){
+        res.json({  
+            message: "something went wrong.",
+            status:false
+        });
+    }
+
 })
 
 const deleteJob = asyncHandler(async(req,res) => {
+
+    try{
+    
+            const {id} = req.body
+            
+            const deleteJob = await Job.findByIdAndUpdate(
+                id,
+                {
+                    //jo field hme set karna hai
+                    $set:{
+                        is_deleted:true,
+                        deleted_at:Date.now()
+                    }
+                },
+                {new:true}//return updated document
+            )
+    
+            if (deleteJob) {
+                res.json({
+                    message: "deleted",
+                    status:true
+                });
+            } else {
+                res.json({
+                    message: "something wrong.",
+                    status:false
+                });
+            }
+    
+        }catch(error){
+            res.json({
+                message: "sddsd",
+                status:false
+            });
+        }
 
 })
 
